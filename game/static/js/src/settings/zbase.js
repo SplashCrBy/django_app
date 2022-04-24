@@ -144,7 +144,7 @@ class Settings {
             outer.register_on_remote();
         });
     }
-    
+
     acwing_login() {
         $.ajax({
             url: "https://app2148.acapp.acwing.com.cn/settings/acwing/web/apply_code/",
@@ -206,34 +206,37 @@ class Settings {
                 }
             }
         })
-    
+
     }
 
     logout_on_remote() {
-        if (this.platform === "ACAPP") return false;
+        if (this.platform === "ACAPP") {
+            this.root.AcWingOS.api.window.close();
+        } else {
 
-        $.ajax({
-            url:"https://app2148.acapp.acwing.com.cn/settings/logout/",
-            type: "GET",
-            success: function(resp) {
-                console.log(resp);
-                if(resp.result === "success") {
-                    location.reload();
+            $.ajax({
+                url:"https://app2148.acapp.acwing.com.cn/settings/logout/",
+                type: "GET",
+                success: function(resp) {
+                    console.log(resp);
+                    if(resp.result === "success") {
+                        location.reload();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-    
+
     login() {
         this.$login.show();
         this.$register.hide();
-    
+
     }
 
     register() {
         this.$register.show();
         this.$login.hide();
-    
+
 
     }
 
